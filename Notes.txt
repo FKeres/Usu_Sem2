@@ -1,0 +1,51 @@
+Rozhodovacie stromy
+    - strom rozdeľuje na sektory, v ktorých sa predikcia robí na základe priemernej hodnoty odpovede pre trénovacie dáta pre daný sektory
+    - vo vnútoných vrcholoch rozdeluje 
+    - listy sú koncové sektory
+
+    Tvorba stromu 
+        - rozdelí sa na neprekrývajúce sa sektory
+        - predikcia v jednotlivých sektoroch sa rovná priemernej hodnote odpovede v trénovacích dát v danom sektore
+        - strom sa buduje zhora nadol, pričom sa pri každom kroku vyberie prediktor a bod rozdelenia, ktoré minimalizujú reziduálny súčet štvorcov (RSS).
+        - Pre každé možné rozdelenie sa vypočíta zníženie RSS, pričom sa vyberie prediktor a bod, ktoré zabezpečia najväčšie zlepšenie
+    
+    RSS 
+        -RSS= sum((yi - y^i)^2)
+
+Algoritmus regresného stromu (Algorithm 8.1):
+
+    - Vytvorenie veľkého stromu pomocou binárneho delenia.
+    - Použitie prerezávania na získanie rôznych podstromov.
+    - Krížová validácia pre výber optimálneho podstromu podľa parametra α.
+    - Návrat k plným dátam a konštrukcia optimálneho podstromu.
+
+Klasifikačné stromy:
+
+    - kvalitatívne odpovede (klasifikáciu), pričom predpoveď závisí od najčastejšie sa vyskytujúcej triedy v terminálnych uzloch.
+    - Obdobný princíp delenia ako v regresných stromoch, no optimalizačné kritérium môže byť napr. Giniho index alebo entropia.
+
+Bagging:
+
+    - Používa techniku bootstrapu na zníženie variability modelov.
+    - Bagging (Bootstrap Aggregating), táto metóda využíva bootstrap na vytvorenie viacerých rôznych trénovacích množín,
+      ktoré sa používajú na trénovanie viacerých modelov
+        
+        Bootstrap
+            -je štatistická metóda, ktorá spočíva v opakovanom náhodnom výbere vzoriek 
+              zo skutočných dát so zámerom vytvoriť rôzne trénovacie množiny, ktoré môžu byť použité 
+              na odhadovanie rôznych štatistických vlastností modelu. 
+    
+    - Opakovane vytvára rôzne trénovacie množiny náhodným vzorkovaním s náhradou.
+    - Výsledný model je priemer predpovedí z týchto modelov:
+
+    - Znižuje variabilitu modelov, najmä rozhodovacích stromov.
+    - Problém vysokej variability rozhodovacích stromov:
+
+        - Stromy môžu generovať odlišné výsledky pri rôznych náhodných rozdeleniach dát.
+        - Bagging tento problém zmierňuje pomocou priemerovania výsledkov.
+
+    Testovacie chyby:
+        - Testovaci& chyba sa stabilizuje s rastúcim počtom stromov - obvykle stačí B=100.
+
+    Out-of-Bag (OOB) chyba:
+        - Každý strom využívá približne 2/3 vzorkov pre tréning; zbylá třetina slúži ako "out-of-bag" dáta pre testovanie.
