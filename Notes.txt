@@ -49,3 +49,7 @@ Bagging:
 
     Out-of-Bag (OOB) chyba:
         - Každý strom využívá približne 2/3 vzorkov pre tréning; zbylá třetina slúži ako "out-of-bag" dáta pre testovanie.
+
+Otazky -
+    DecisionTreeRegressor - toto mozem zobrat
+    BaggingRegressor - toto sprav sam
